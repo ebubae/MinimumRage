@@ -1,4 +1,64 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    position: relative;
+    width: 100%;
+    background-color: #92FFB0;
+}
+
+body {
+    width: 100%;
+}
+
+header {
+    padding-top: 10px;
+    background-color: blue;
+}
+
+main {
+    width: 75%;
+    min-height: 100%;
+    margin: 0 auto -50px auto;
+}
+
+main:after {
+    content: "";
+    display: block;
+}
+
+footer, main:after {
+    height: 50px;
+}
+
+header h1 {
+    text-align: center;
+}
+
+br {
+    line-height: 3ex;
+}
+
+footer {
+    background-color: darkgreen;
+    text-align: center;
+}
+
 #map {
     width: 350px;
     height: 250px;
+}
+
+#min {
+    text-transform: lowercase;
+}
+
+#rage {
+    text-transform: uppercase;
+    color: red;
 }
