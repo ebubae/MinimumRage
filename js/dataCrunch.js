@@ -10,7 +10,8 @@ fs.readFile('../cleanData.csv', encoding="UTF-8", function read(err, data)
     }
     content = data;
     process();
-    console.log(values);
+    var states = compare(values);
+    console.log(states);
 });
 
 function process()
@@ -28,11 +29,38 @@ function process()
                 num += content[k+j];
                 j++;
             }
-            values[id] = num;
+            values[id] = parseFloat(num);
         }
         else if(content[k] === "\"")
         {
             start = k;
         }
     }
+}
+
+function compare(values)
+{
+    var states = {};
+    console.log(values.length);
+    for(var k = 0; k < Object.keys(values).length; k++)
+    {
+        console.log("yay");
+        var place = Object.keys(values)[k];
+        var currState = place.substring(place.length-2, place.length);
+        if(!RegExp(currState).test(Object.keys(states)))
+        {
+            states[currState] = [values[place], 1];
+        }
+        else
+        {
+            states[currState][0] += values[place];
+            states[currState][1]++;
+        }
+    }
+    for(var j = 0; j < Object.keys(states).length; j++)
+    {
+        var nowState = Object.keys(states)[j];
+        states[nowState] = states[nowState][0]/states[nowState][1];
+    }
+    return states;
 }
