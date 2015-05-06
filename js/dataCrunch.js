@@ -41,10 +41,8 @@ function process()
 function compare(values)
 {
     var states = {};
-    console.log(values.length);
     for(var k = 0; k < Object.keys(values).length; k++)
     {
-        console.log("yay");
         var place = Object.keys(values)[k];
         var currState = place.substring(place.length-2, place.length);
         if(!RegExp(currState).test(Object.keys(states)))
