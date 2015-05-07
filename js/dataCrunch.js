@@ -1,22 +1,28 @@
 var fs = require("fs")
 
-var content;
-var values = {};
-fs.readFile('../cleanData.csv', encoding="UTF-8", function read(err, data) 
+function work()
 {
-    if (err) 
+    var content;
+    var values = {};
+    var states = {};
+    fs.readFile('../cleanData.csv', encoding="UTF-8", function read(err, data) 
     {
-        throw err;
-    }
-    content = data;
-    process();
-    var states = compare(values);
-    console.log(states);
-});
+        if (err) 
+        {
+            throw err;
+        }
+        content = data;
+        values = process(content);
+        states = compare(values);
+        console.log(states);
+        return states;
+    });
+}
 
-function process()
+function process(content)
 {
     var start = 0;
+    var values = {};
     for(var k = 0; k < content.length; k++)
     {
         if(content[k] === "\"" && content[k+1] === ",")
@@ -36,6 +42,7 @@ function process()
             start = k;
         }
     }
+    return values;
 }
 
 function compare(values)
@@ -62,3 +69,5 @@ function compare(values)
     }
     return states;
 }
+
+work();
