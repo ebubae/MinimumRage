@@ -87,4 +87,18 @@ section {
     font-size: 6em;
     color: white;
     background-color: green;
+    transition: all .3s;
+}
+
+#start:hover {
+    background-color: lightgreen;
+    color: black;
+}
+a:link, a:visited {
+    color: indianred;
+    text-decoration: none;
+    transition: color .2s;
+}
+a:hover {
+    color: darkslategray;
 }
