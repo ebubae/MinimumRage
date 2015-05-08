@@ -2,20 +2,18 @@ var fs = require("fs")
 
 function work()
 {
-    var content;
-    var values = {};
-    var states = {};
-    fs.readFile('../cleanData.csv', encoding="UTF-8", function read(err, data) 
+    var content = fs.readFileSync('../cleanData.csv').toString(); 
+    var values = process(content);
+    var states = index(values);
+    return states;
+
+    fs.readFile('../thresh14.csv', encoding="UTF-8", function read(err, data)
     {
-        if (err) 
+        if(err)
         {
             throw err;
         }
-        content = data;
-        values = process(content);
-        states = compare(values);
-        console.log(states);
-        return states;
+        
     });
 }
 
@@ -45,7 +43,7 @@ function process(content)
     return values;
 }
 
-function compare(values)
+function index(values)
 {
     var states = {};
     for(var k = 0; k < Object.keys(values).length; k++)
@@ -70,4 +68,9 @@ function compare(values)
     return states;
 }
 
-work();
+function poor()
+{
+    
+}
+
+console.log(work());
