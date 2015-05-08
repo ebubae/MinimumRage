@@ -49,6 +49,8 @@ footer {
     background: url("../img/footerbg.png");
     text-align: center;
     line-height: 50px;
+    min-width: 516px;
+    font-size: 1em;
 }
 
 #map {
@@ -88,6 +90,7 @@ section {
     color: white;
     background-color: green;
     transition: all .3s;
+    min-width: 220px;
 }
 
 #start:hover {
@@ -97,7 +100,7 @@ section {
 a:link, a:visited {
     color: indianred;
     text-decoration: none;
-    transition: color .2s;
+    transition: color .4s;
 }
 a:hover {
     color: darkslategray;
