@@ -2,19 +2,11 @@ var fs = require("fs")
 
 function work()
 {
-    var content = fs.readFileSync('../cleanData.csv').toString(); 
-    var values = process(content);
-    var states = index(values);
+    var livingData = fs.readFileSync('../cleanData.csv').toString(); 
+    var processLiving = process(livingData);
+    var povertyData = fs.readFileSync('../thresh14.csv').toString().split("\n");
+    var states = index(processLiving, povertyData);
     return states;
-
-    fs.readFile('../thresh14.csv', encoding="UTF-8", function read(err, data)
-    {
-        if(err)
-        {
-            throw err;
-        }
-        
-    });
 }
 
 function process(content)
@@ -43,9 +35,13 @@ function process(content)
     return values;
 }
 
-function index(values)
+function index(values, data)
 {
     var states = {};
+    var size = "6";
+    var kids = "0";
+    var age = "67";
+    var threshold = 0;
     for(var k = 0; k < Object.keys(values).length; k++)
     {
         var place = Object.keys(values)[k];
@@ -60,17 +56,28 @@ function index(values)
             states[currState][1]++;
         }
     }
+    for(var i = 0; i < data.length; i++)
+    {
+        var line = data[i].split(",");
+        if(data[i][0] == size)
+        {
+            if(parseInt(age, 10) > 65 && line[1] == "true")
+            {
+                threshold = parseInt(line[parseInt(kids, 10)+2], 10);
+            }
+            if(parseInt(size, 10) > 2)
+            {
+                threshold = parseInt(line[parseInt(kids, 10)+2], 10);
+            }
+        }
+    }
+    console.log(threshold);
     for(var j = 0; j < Object.keys(states).length; j++)
     {
         var nowState = Object.keys(states)[j];
-        states[nowState] = states[nowState][0]/states[nowState][1];
+        states[nowState] = threshold * states[nowState][0]/(100* states[nowState][1]);
     }
     return states;
-}
-
-function poor()
-{
-    
 }
 
 console.log(work());
