@@ -1,11 +1,11 @@
 var fs = require("fs")
 
-function work()
+function work(response)
 {
     var livingData = fs.readFileSync('../cleanData.csv').toString(); 
     var processLiving = process(livingData);
     var povertyData = fs.readFileSync('../thresh14.csv').toString().split("\n");
-    var states = index(processLiving, povertyData);
+    var states = index(processLiving, povertyData, response);
     return states;
 }
 
@@ -35,12 +35,9 @@ function process(content)
     return values;
 }
 
-function index(values, data)
+function index(values, data, response)
 {
     var states = {};
-    var size = "6";
-    var kids = "0";
-    var age = "67";
     var threshold = 0;
     for(var k = 0; k < Object.keys(values).length; k++)
     {
@@ -59,15 +56,15 @@ function index(values, data)
     for(var i = 0; i < data.length; i++)
     {
         var line = data[i].split(",");
-        if(data[i][0] == size)
+        if(data[i][0] == response["size"])
         {
-            if(parseInt(age, 10) > 65 && line[1] == "true")
+            if(parseInt(response["age"], 10) > 65 && line[1] == "true")
             {
-                threshold = parseInt(line[parseInt(kids, 10)+2], 10);
+                threshold = parseInt(line[parseInt(response["kids"], 10)+2], 10);
             }
-            if(parseInt(size, 10) > 2)
+            if(parseInt(response["size"], 10) > 2)
             {
-                threshold = parseInt(line[parseInt(kids, 10)+2], 10);
+                threshold = parseInt(line[parseInt(response["kids"], 10)+2], 10);
             }
         }
     }
@@ -80,4 +77,10 @@ function index(values, data)
     return states;
 }
 
-console.log(work());
+var response = 
+{
+    "size": "6",
+    "kids": "0",
+    "age": "67",
+};
+console.log(work(response));
