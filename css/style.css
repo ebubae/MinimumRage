@@ -107,7 +107,10 @@ a:hover {
 }
 
 #load {
+    display: none;
     width: 100%;
-    background: url("../img/loader.gif");
+    background-image: url("../img/loader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
     
 }
