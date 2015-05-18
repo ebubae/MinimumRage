@@ -39,6 +39,7 @@ footer, main:after {
 header h1 {
     text-align: center;
     font-size: 5em;
+    font-weight: bold;
 }
 
 br {
@@ -54,8 +55,8 @@ footer {
 }
 
 #map {
-    width: 350px;
-    height: 250px;
+    width: 50%;
+    min-height: 250px;
 }
 
 #min {
@@ -112,5 +113,43 @@ a:hover {
     background-image: url("../img/loader.gif");
     background-repeat: no-repeat;
     background-position: center;
+}
+#mapform {
+    position: relative;
+    width: 100%;
+    top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
     
+}
+
+#mapform form {
+    width: 50%;
+}
+
+form p {
+    font-size: 3em;
+}
+
+input[type=text] {
+    display: block;
+    position: relative;
+    top: 10px;
+    height: 100px;
+    width: 300px;
+    border-radius: none;
+    appearance: none;
+    box-shadow: none;
+    padding: 10px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border: 0.3s;
+}
+
+input[type=text]:focus {
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #969696;
+    outline: none;
 }
