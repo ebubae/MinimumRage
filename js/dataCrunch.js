@@ -68,7 +68,6 @@ function index(values, data, response)
             }
         }
     }
-    console.log(threshold);
     for(var j = 0; j < Object.keys(states).length; j++)
     {
         var nowState = Object.keys(states)[j];
@@ -77,10 +76,45 @@ function index(values, data, response)
     return states;
 }
 
-var response = 
+function main()
 {
-    "size": "6",
-    "kids": "0",
-    "age": "67",
-};
-console.log(work(response));
+    size = document.getElementById("fam");
+    kids = document.getElementById("kids");
+    age = document.getElementById("old");
+    income = document.getElementById("income");
+    var response = 
+    {
+        "size": size,
+        "kids": kids,
+        "age": age,
+    };
+    rage = work(response);
+    /*console.log(rage);*/
+    for(var k = 0; k < rage.length; k++)
+    {
+        var hue = Math.floor( (60 + rage[Object.keys(rage)[k]] - income) * 120 / 100)
+        if(hue > 120)
+        {
+            hue = 120
+        }
+        if(hue < 0)
+        {
+            hue = 0
+        }
+        $('#map').usmap(
+        {
+            stateSpecificStyles:
+            {
+                Object.keys(rage)[k] : {fill: "hsl("+ hue +", " + .5 + ", " + .5 + ")"}
+            }
+        });
+    } 
+}
+
+$(document).keypress(function(e) 
+{
+    if(e.which == 13)
+    {
+        main();
+    }
+}
