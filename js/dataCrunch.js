@@ -1,21 +1,25 @@
-//var fs = require("fs")
-
-
-function main()
+function main(e)
 {
-    size = document.getElementById("fam");
-    kids = document.getElementById("kids");
-    age = document.getElementById("old");
-    income = document.getElementById("income");
-    size.onclick = function(){alert("hello");}
+    if(e.preventDefault)
+    {
+        e.preventDefault();
+    }
+    size = document.getElementById("fam").value;
+    kids = document.getElementById("kids").value;
+    age = document.getElementById("old").value;
+    income = document.getElementById("income").value;
     var response = 
     {
         "size": size,
         "kids": kids,
         "age": age,
     };
-    rage = work(response);
-    /*console.log(rage);*/
+    $.ajax({
+        type: "POST",
+        url: "call.py",
+        data: response
+    }).done(function(o){
+    });
     for(var k = 0; k < rage.length; k++)
     {
         var hue = Math.floor( (60 + rage[Object.keys(rage)[k]] - income) * 120 / 100)
@@ -34,12 +38,20 @@ function main()
                 //Object.keys(rage)[k] : {fill: "hsl("+ hue +", " + .5 + ", " + .5 + ")"}
             }
         });
-    } 
+    }
+    return false;
 }
 
-$(document).ready(function () {
-    console.log("ready");
-    $('button').click(function () {
-        console.log("hello");
-    });
+$(document).ready(function()
+{
+    var form = document.getElementById("rageData");
+    console.log(form);
+    if (form.attachEvent)
+    {
+        form.attachEvent("submit", main);
+    } 
+    else 
+    {
+        form.addEventListener("submit", main);
+    }
 });
