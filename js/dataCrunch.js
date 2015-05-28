@@ -61,55 +61,37 @@ function main(e)
         e.preventDefault();
     }
 
-    size = document.getElementById("fam").value;
-    kids = document.getElementById("kids").value;
-    age = document.getElementById("old").value;
-    income = document.getElementById("income").value;
+    var size = document.getElementById("fam").value;
+    var kids = document.getElementById("kids").value;
+    var age = document.getElementById("old").value;
+    var income = document.getElementById("income").value;
 
     var rage = 0;
-    if(age < 65)
-    {
-        rage = youngPoor[size-1][kids];
-    }
-    else
-    {
-        rage = oldPoor[size-1][kids];
-    }
+    rage = age < 65 ? youngPoor[size-1][kids] : oldPoor[size-1][kids]
 
-    console.log(document.getElementById("map"));
+    var myStyles = {};
     for(var k = 0; k < 50; k++)
     {
-        var hue = Math.floor( 60 + (rage*indices[Object.keys(indices)[k]] - income) * 120 / 100)
+        var hue = Math.floor( 60 + (rage*indices[Object.keys(indices)[k]] - income) * 120 / 1000);
         if(hue > 120)
         {
-            hue = 120
+            hue = 120;
         }
         if(hue < 0)
         {
-            hue = 0
+            hue = 0;
         }
-        $('#map').usmap(
-        {
-            stateSpecificStyles:
-            {
-                //Object.keys(indices)[k] : {fill: "hsl("+ hue +", " + .5 + ", " + .5 + ")"}
-                "CO" : {fill : "yellow"}
-            }
-        });
+        myStyles[Object.keys(indices)[k]] = {fill : "yellow"};
+        console.log(hue);
     }
+    $('#map').usmap({
+        stateSpecificStyles: myStyles
+    });
     return false;
 }
 
 $(document).ready(function()
 {
-    $('#map').usmap(
-    {
-        stateSpecificStyles:
-        {
-            "CO" : {fill: "yellow"}
-        }
-    });
-
     var form = document.getElementById("rageData");
     if (form.attachEvent)
     {
