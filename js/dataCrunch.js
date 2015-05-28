@@ -1,5 +1,6 @@
 function main(e)
 {
+    e.preventDefault();
     var indices = {
         'FL': 99.48181818181818, 
         'KS': 92.02999999999999, 
@@ -56,11 +57,6 @@ function main(e)
     var oldPoor = [[11354], [14309, 16256]];
     var youngPoor = [[12316], [15853, 16317], [18518, 19055, 19073], [24418, 24817, 24008, 24091], [29447, 29875, 28960, 28252, 27820], [33869, 34004, 33303, 32631, 31633, 31041], [38971, 39214, 38375, 37791, 36701, 35431, 34036], [43586, 43970, 43179, 42485, 41501, 40252, 38953, 38622], [52430 ,52685, 51984, 51396, 50430, 49101, 47899, 47601, 45768]]
 
-    if(e.preventDefault)
-    {
-        e.preventDefault();
-    }
-
     var size = document.getElementById("fam").value;
     var kids = document.getElementById("kids").value;
     var age = document.getElementById("old").value;
@@ -70,35 +66,36 @@ function main(e)
     rage = age < 65 ? youngPoor[size-1][kids] : oldPoor[size-1][kids]
 
     var myStyles = {};
+    $('#CA').css('fill', 'white');
     for(var k = 0; k < 50; k++)
     {
-        var hue = Math.floor( 60 + (rage*indices[Object.keys(indices)[k]] - income) * 120 / 1000);
-        if(hue > 120)
+        var hue = Math.floor(125 + (rage*indices[Object.keys(indices)[k]] - income) * 125 / 10000);
+        if(hue > 255)
         {
-            hue = 120;
+            hue = 255;
         }
         if(hue < 0)
         {
             hue = 0;
         }
-        myStyles[Object.keys(indices)[k]] = {fill : "yellow"};
-        console.log(hue);
+//        var color = "hsl(120, 100%, 50%)";
+        var color = "rgb(" + hue +", " + (255 - hue) + ", 0)";
+//        console.log(color);
+//        myStyles[Object.keys(indices)[k]] = {fill : color};
+        $('#'+Object.keys(indices)[k]).css('fill', color);
     }
-    $('#map').usmap({
-        stateSpecificStyles: myStyles
-    });
+//    $('#map').usmap({
+//        stateHoverStyles: {},
+//        stateStyles: {fill: "orange"},
+//        stateSpecificHoverStyles: myStyles,
+//        stateSpecificStyles: myStyles
+//    });
     return false;
 }
 
 $(document).ready(function()
 {
     var form = document.getElementById("rageData");
-    if (form.attachEvent)
-    {
-        form.attachEvent("submit", main);
-    } 
-    else 
-    {
-        form.addEventListener("submit", main);
-    }
+    form.addEventListener("submit", main);
+//    $('#showRage').click(main());
 });

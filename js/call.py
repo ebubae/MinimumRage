@@ -9,7 +9,7 @@ def work():
     return states
 
 def process():
-    content = open('cleanData.csv', 'r')
+    content = open('../cleanData.csv', 'r')
     start = 0
     values = {}
     for line in content:
@@ -19,7 +19,7 @@ def process():
     return values;
 
 def index(values):
-    data = open("thresh14.csv")
+    data = open("../thresh14.csv")
     states = {}
     for index in list(values.keys()):
         state = index[-2] + index[-1]
@@ -32,7 +32,7 @@ def index(values):
     print(states)
     return states
 
-cgitb.enable()
-response = cgi.FieldStorage()
-print(type(response))
-work(response)
+#cgitb.enable()
+#response = cgi.FieldStorage()
+
+work()
