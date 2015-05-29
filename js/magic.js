@@ -2,7 +2,8 @@
  {
     $("#start").click(function()
     {
-        var toLoad = "map/index.html #content";
+        window.history.pushState("idk dude", "Minimum Rage: Map Your Rage", "map/index.html");
+        var toLoad = "index.html #content";
         $("#content").hide('slide', {direction: 'left'}, 'slow');
         $("#load").fadeIn('normal');
         setTimeout(loadContent, 800);
@@ -15,7 +16,7 @@
             setTimeout(2000);
             $("#content").load(toLoad, '', showNewContent());
         }
-        window.location.href = window.location.href.substring(0, window.location.href.length - 10) + "map/index.html";
+        //window.location.href = window.location.href.substring(0, window.location.href.length - 10) + "map/index.html";
         function showNewContent()
         {
             hideLoader();

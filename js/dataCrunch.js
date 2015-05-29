@@ -1,5 +1,6 @@
 function main()
 {
+    alert("loaded dataCrunch");
     var indices = {
         'FL': 99.48181818181818, 
         'KS': 92.02999999999999, 
