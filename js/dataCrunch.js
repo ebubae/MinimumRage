@@ -62,6 +62,8 @@ function main()
     var income = document.getElementById("income").value;
 
     var rage = 0;
+    if(age > 65 && size > 2)
+        return false
     rage = age < 65 ? youngPoor[size-1][kids] : oldPoor[size-1][kids]
 
     var states = Object.keys(indices);
