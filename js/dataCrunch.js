@@ -94,6 +94,8 @@ function main()
         var fsize = Math.abs((hue - 125) / 125) * 3;
         if(fsize > 3)
             fsize = 3;
+        if(fsize < 1)
+            fsize = 1;
         if(nowState == "HI")
             console.log(fsize);
         $(newDiv).css("color", color);
