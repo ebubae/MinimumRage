@@ -161,3 +161,7 @@ input[type=number]:focus {
     width: 65%;
     background-color: hsla(208, 17%, 50%, 0.3);
 }
+
+#showRage {
+    visibility: hidden;
+}
