@@ -1,5 +1,4 @@
  $(document).ready(function() {
-    $('#map').usmap({});
     $("#start").click(function() {
         var toLoad = "map/index.html #content";
         $("#content").hide('slide', {direction: 'left'}, 'slow');
