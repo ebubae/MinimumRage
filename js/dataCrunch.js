@@ -74,6 +74,7 @@ function main()
         order.push(temp);
     }
     order.sort();
+    $("#states").html("")
     for(var j = 0; j < 50; j++)
     {
         $("#states").append(states[values.indexOf(order[j])] + " ");
