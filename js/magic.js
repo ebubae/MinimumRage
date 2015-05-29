@@ -2,11 +2,11 @@
  {
     $("#start").click(function()
     {
-        window.history.pushState("idk dude", "Minimum Rage: Map Your Rage", "map/index.html");
+        window.history.replaceState("idk dude", "Minimum Rage: Map Your Rage", "map/index.html");
         var toLoad = "index.html #content";
-        $("#content").hide('slide', {direction: 'left'}, 'slow');
+        //$("#content").hide('slide', {direction: 'left'}, 'slow');
         $("#load").fadeIn('normal');
-        setTimeout(loadContent, 800);
+        setTimeout(loadContent, 2800);
         function hideLoader()
         {
             $("#load").fadeOut('normal');
@@ -14,15 +14,16 @@
         function loadContent()
         {
             setTimeout(2000);
-            $("#content").load(toLoad, '', showNewContent());
+            //$("#content").load(toLoad, '', showNewContent());
         }
         //window.location.href = window.location.href.substring(0, window.location.href.length - 10) + "map/index.html";
         function showNewContent()
         {
             hideLoader();
-            $("#content").show('slide', {direction: 'right'}, 'slow');
+            //$("#content").show('slide', {direction: 'right'}, 'slow');
 //            $("#map")[0].usmap({});
         }
+        window.location.reload()
         function doLogic()
         {
             return false;
