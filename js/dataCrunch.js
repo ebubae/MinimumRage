@@ -73,11 +73,35 @@ function main()
         values.push(temp);
         order.push(temp);
     }
-    order.sort();
+    order = sort(order);
     $("#states").html("")
     for(var j = 0; j < 50; j++)
     {
-        $("#states").append(states[values.indexOf(order[j])] + " ");
+        var nowState = states[values.indexOf(order[j])];
+        var newDiv = document.createElement("div");
+        var hue = Math.floor(125 + (rage*indices[nowState] / 100 - income) * 125 / 10000);
+        if(hue > 255)
+        {
+            hue = 255;
+        }
+        if(hue < 0)
+        {
+            hue = 0;
+        }
+        var color = "rgb(" + hue +", " + (255 - hue) + ", 0)";
+        if(nowState == "HI")
+            console.log(color);
+        var fsize = Math.abs((hue - 125) / 125) * 3;
+        if(fsize > 3)
+            fsize = 3;
+        if(nowState == "HI")
+            console.log(fsize);
+        $(newDiv).css("color", color);
+        $(newDiv).css("textAlign", "center");
+        $(newDiv).css("fontSize", ""+fsize+"em");
+
+        $(newDiv).append(nowState);        
+        $("#states").append(newDiv);
     }
 
 /*        var hue = Math.floor(125 + (rage*indices[Object.keys(indices)[k]] - income) * 125 / 10000);
@@ -103,6 +127,33 @@ function main()
     $("CA").css("fill", "red");
 */
     return false;
+}
+
+function sort(list)
+{
+    out = [];
+    for(var k =  0; k < list.length; k++)
+    {
+        val = list[k];
+        if(out.length === 0)
+            out.push(val);
+        else
+        {
+            added = false;
+            for(var j = 0; j < out.length; j++)
+            {
+                if(val <= out[j])
+                {
+                    out.splice(j, 0, val);
+                    added = true;
+                    break;
+                }
+            }
+            if(!added)
+                out.push(val);
+        }
+    }
+    return out;
 }
 
 $(document).ready(function()
