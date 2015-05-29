@@ -92,8 +92,8 @@ function main()
         if(nowState == "HI")
             console.log(color);
         var fsize = Math.abs((hue - 125) / 125) * 3;
-        if(fsize > 3)
-            fsize = 3;
+        if(fsize > 4)
+            fsize = 4;
         if(fsize < 1)
             fsize = 1;
         if(nowState == "HI")
@@ -101,8 +101,9 @@ function main()
         $(newDiv).css("color", color);
         $(newDiv).css("textAlign", "center");
         $(newDiv).css("fontSize", ""+fsize+"em");
+        $(newDiv).css("display", "inline-block");
 
-        $(newDiv).append(nowState);        
+        $(newDiv).append(nowState + "&nbsp;");        
         $("#states").append(newDiv);
     }
 

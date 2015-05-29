@@ -159,5 +159,5 @@ input[type=number]:focus {
 #states {
     min-height: 500px;
     width: 65%;
-    background-color: hsla(208, 17%, 50%, .5);
+    background-color: hsla(208, 17%, 50%, 0.3);
 }
