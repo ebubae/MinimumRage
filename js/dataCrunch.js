@@ -1,6 +1,5 @@
-function main(e)
+function main()
 {
-    e.preventDefault();
     var indices = {
         'FL': 99.48181818181818, 
         'KS': 92.02999999999999, 
@@ -65,11 +64,22 @@ function main(e)
     var rage = 0;
     rage = age < 65 ? youngPoor[size-1][kids] : oldPoor[size-1][kids]
 
-    var myStyles = {};
-    $('#CA').css('fill', 'white');
+    var states = Object.keys(indices);
+    order = [];
+    values = [];
     for(var k = 0; k < 50; k++)
     {
-        var hue = Math.floor(125 + (rage*indices[Object.keys(indices)[k]] - income) * 125 / 10000);
+        temp = income - rage*indices[states[k]] / 100;
+        values.push(temp);
+        order.push(temp);
+    }
+    order.sort();
+    for(var j = 0; j < 50; j++)
+    {
+        $("#states").append(states[values.indexOf(order[j])] + " ");
+    }
+
+/*        var hue = Math.floor(125 + (rage*indices[Object.keys(indices)[k]] - income) * 125 / 10000);
         if(hue > 255)
         {
             hue = 255;
@@ -78,24 +88,29 @@ function main(e)
         {
             hue = 0;
         }
-//        var color = "hsl(120, 100%, 50%)";
         var color = "rgb(" + hue +", " + (255 - hue) + ", 0)";
-//        console.log(color);
-//        myStyles[Object.keys(indices)[k]] = {fill : color};
+        console.log(color);
+        myStyles[Object.keys(indices)[k]] = {fill : color};
         $('#'+Object.keys(indices)[k]).css('fill', color);
-    }
-//    $('#map').usmap({
-//        stateHoverStyles: {},
-//        stateStyles: {fill: "orange"},
-//        stateSpecificHoverStyles: myStyles,
-//        stateSpecificStyles: myStyles
-//    });
+  }
+    $('#map').usmap({
+        stateHoverStyles: {},
+        stateStyles: {fill: "orange"},
+        stateSpecificHoverStyles: myStyles,
+        stateSpecificStyles: myStyles
+    });
+    $("CA").css("fill", "red");
+*/
     return false;
 }
 
 $(document).ready(function()
 {
-    var form = document.getElementById("rageData");
-    form.addEventListener("submit", main);
-//    $('#showRage').click(main());
+//    var form = document.getElementById("rageData");
+//    form.addEventListener("submit", main);
+    $('#showRage').click(function() 
+    {
+        main();
+        return false;
+    });
 });
